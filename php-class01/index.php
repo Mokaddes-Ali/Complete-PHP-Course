@@ -9,15 +9,24 @@
 
 <body style="background-color: aliceblue; font-size: 40px; margin-left: 100px;">
     <?php
-    
-    $personName = "Mokaddes Ali";
+    // variable
+    $personName = "Mokaddes Ali<br>";
     
     echo $personName;
 
     // Best Practise
     
-    // $person_name............... snake_case($personName/variable/function);
+    // $person_name............... SnakeCase(variable/function);
+    // $myName................ camelCase(Method)
+    // $MyName................ PascalCase(Class)
+    $name = "Mokaddes Ali Devloper <br>";
+    echo $name;
     
+    // Constant
+
+    define("PI", 3.1416);
+    echo PI;
+
 
 
    ?>
