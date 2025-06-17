@@ -20,14 +20,6 @@
 
 <body style="background-color: aliceblue; font-size: 30px; margin-left: 100px;">
     <table>
-        <!-- <tbody>
-            <tr>
-                <th>Name</th>
-                <th>Roll</th>
-                <th>Age</th>
-                <th>Date of Birth</th>
-            </tr>
-        </tbody> -->
         <?php 
         for( $i = 1 ; $i <= 6 ; $i++ ):
         ?>
