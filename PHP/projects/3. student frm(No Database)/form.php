@@ -51,10 +51,10 @@
                     <?php if (isset($_POST['name'])): ?>
                     <td><?php echo $_POST['name']; ?></td>
                     <?php endif?>
-<?php if (isset($_POST['name'])): ?>
+                    <?php if (isset($_POST['name'])): ?>
                     <td><?php echo $_POST['email']; ?></td>
                     <?php endif?>
-<?php if (isset($_POST['name'])): ?>
+                    <?php if (isset($_POST['name'])): ?>
                     <td><?php echo $_POST['phone']; ?></td>
                     <?php endif?>
                 </tr>
