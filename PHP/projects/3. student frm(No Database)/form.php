@@ -95,6 +95,8 @@
         <?php
             $name = $email = $phone = '';
             $students = [];
+            $errors = [];
+            $success = "";
             
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 $name  = $_POST['name'];
@@ -125,27 +127,62 @@
                 if(isset($_SESSION['students'])){
                     $students  = $_SESSION['students']; 
                 }
-             
+                
+                // show error and fill required
+               if(empty($name)){
+                 $errors['name'] = "Name is required";
+               }
 
+               if(empty($email)){
+                 $errors['email'] = "email is required";
+               }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $errors['email'] = "Invalid email format";
+                
+               }
+
+               if(empty($phone)){
+                 $errors['phone'] = "phone is required";
+               }
+             
+               if(empty($errors) && !empty($name) && !empty($email)&& !empty($phone)){
+                 $success = "New Student Add successfully!";
+               }
             }
 
         ?>
         <div class="form-container">
+            <?php if(isset($success)): ?>
+            <p style="color: green;"><?php echo $success;?></p>
+
+            <?php endif; ?>
             <form method="POST" action="">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>">
                 </div>
+                <?php if(isset($errors['name'])): ?>
+                <p style=" color: red;"><?php echo $errors['name'];?></p>
 
+                <?php endif; ?>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" value="<?php echo  htmlspecialchars($email); ?>"
+                        required>
                 </div>
+                <?php if(isset($errors['email'])): ?>
+                <p style="color: red;"><?php echo $errors['email'];?></p>
+
+                <?php endif; ?>
 
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="text" id="phone" name="phone" required>
+                    <input type="text" id="phone" name="phone" value=" <?php echo htmlspecialchars($phone); ?>"
+                        required>
                 </div>
+                <?php if(isset($errors['phone'])): ?>
+                <p style="color: red;"><?php echo $errors['phone'];?></p>
+
+                <?php endif; ?>
 
 
                 <button type="submit" name="submit" class="submit-btn">Submit</button>
@@ -179,9 +216,9 @@
                 <?php else: ?>
                 <tr>
                     <?php foreach ( $students as $student) : ?>
-                    <td><?php echo $student['name']; ?></td>
-                    <td><?php echo $student['email']; ?></td>
-                    <td><?php echo $student['phone']; ?></td>
+                    <td><?php echo htmlspecialchars($student['name']); ?></td>
+                    <td><?php echo htmlspecialchars($student['email']); ?></td>
+                    <td><?php echo htmlspecialchars($student['phone']); ?></td>
 
                 </tr>
                 <?php endforeach; ?>
