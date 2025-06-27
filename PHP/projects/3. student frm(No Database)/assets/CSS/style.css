@@ -107,3 +107,23 @@ h1, h2, h3 {
 .data-table tr:hover {
     background-color: #FFFCF4;
 }
+
+/* // gender */
+
+.inline-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .inline-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid;
+    border-radius: 4px;
+  }
