@@ -307,7 +307,7 @@
                     <td>
                         <?php if(!empty($student['photo'])):?>
                         <img src="upload/<?php echo htmlspecialchars($student['photo']);?>" alt="Student Photo"
-                            width="50">
+                            width="100">
                         <?php else: ?>
                         N/A
                         <?php endif;?>
