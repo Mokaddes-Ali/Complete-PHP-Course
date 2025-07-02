@@ -35,5 +35,4 @@ class person {
         echo "Profession: " . $this->profession . "<br>";
     }
 }
-
 ?>

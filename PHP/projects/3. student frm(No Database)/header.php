@@ -1,8 +1,7 @@
 <?php 
 if (isset($_GET['accept_cookie'])) {
-    setcookie('accept_cookie', 'yes', time() + (86400 * 30), '/');
-    // redirect so that cookie is available immediately
-    header("Location: ".$_SERVER['PHP_SELF']);
+    setcookie('cookie_accepted', 'yes', time() + (86400 * 30), '/');
+    // header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
 ?>
@@ -22,7 +21,7 @@ if (isset($_GET['accept_cookie'])) {
         <a href="show.php">Show Students</a>
     </div>
 
-    <?php if (!isset($_COOKIE['accept_cookie'])): ?>
+    <?php if (!isset($_COOKIE['cookie_accepted'])): ?>
         <div class="cookie-box" id="cookieBox">
             <div>
                 We use cookies to improve your experience. By continuing, you agree to our cookie policy.
@@ -35,7 +34,10 @@ if (isset($_GET['accept_cookie'])) {
 
     <script>
         function acceptCookie(){
-            window.location.href = "?accept_cookie=true";
+            // window.location.href = "?accept_cookie=true";
+            fetch('?accept_cookie=true').then(() => {
+               document.getElementById('cookieBox').style.display="none";
+            })
         }
     </script>
 </body>

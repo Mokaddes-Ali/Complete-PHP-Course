@@ -1,3 +1,11 @@
+<!-- Normal Structure of Cookie
+
+<?php 
+setcookie("cookie name", "value", time() + (86400*24*60*60  ),"/", "example.com", true, true, ['samesite' => 'Strict']);
+?>
+ 
+-->
+
 <?php 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $username = $_POST['username'];

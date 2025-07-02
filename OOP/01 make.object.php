@@ -30,11 +30,30 @@ $child->profession = 'student';
 $child->weight = 8;
 
 
-// print information
+// print father information
 $father->getName();
 $father->getWeight();
 $father->getAge();
 $father->getProfession();
 $father->shop();
+
+
+// Mother Information
+echo "<h2>Mother Info</h2>";
+$mother->getName();
+$mother->getAge();
+$mother->getSex();
+$mother->getProfession();
+$mother->getWeight();
+$mother->shop();
+
+//  Child Information
+echo "<h2>Child Info</h2>";
+$child->getName();
+$child->getAge();
+$child->getSex();
+$child->getProfession();
+$child->getWeight();
+$child->shop();
 
 ?>
