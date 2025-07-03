@@ -29,7 +29,6 @@ $child->sex = 'female';
 $child->profession = 'student';
 $child->weight = 8;
 
-
 // print father information
 $father->getName();
 $father->getWeight();

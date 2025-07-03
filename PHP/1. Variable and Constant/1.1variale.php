@@ -13,8 +13,12 @@
     <?php
     // variable
     $personName = "Mokaddes Ali<br>";
+    $age = 25;
+    $salary = 50000;
     
-    echo $personName;
+    echo "Name:" . $personName . "<br>";
+    echo "Age:" .  $age . "<br>";
+    echo "Salary:" . $salary . "<br>";
 
     // Best Practise
     
@@ -23,18 +27,6 @@
     // $MyName................ PascalCase(Class)
     $name = "Mokaddes Ali Devloper <br>";
     echo $name;
-    
-    // Constant
-
-    define("PI", 3.1416);
-    echo PI . "<br>"; // concatination
-
-    // statement and expression
-    
-    $animals = "Dogs"; 
-    /* here $animals and "Dogs" are both separate expression but 
-     $animals = "Dogs"; full is a statement(compelete a verb) */
-
    ?>
 
 </body>
