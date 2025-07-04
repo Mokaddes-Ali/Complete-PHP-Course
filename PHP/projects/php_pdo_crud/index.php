@@ -3,19 +3,13 @@ include 'db_connect.php';
 
 try{
     $sql = "SELECT * FROM students";
-    // $result = mysqli_query($conn, $sql);
-    $result = $conn->query($sql);
+   
+    // $result = $conn->query($sql);
+         $stmt = $conn->prepare($sql);
+  $stmt->execute();
+  $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if($result === false){
-        throw new Exception("Query Failed:" . $sql ." ". $conn->error);
-
-    }
-    // else{
-    //      echo "<div style='padding:10px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 10px;'>
-    //             Data Fetch successful!
-    //           </div>";
-    // }
-}catch(Exception $e){
+}catch(PDOException $e){
         die("Error". $e->getMessage());
 }
 ?>
@@ -147,8 +141,10 @@ include 'flash.message.php';
         </thead>
         <tbody>
             <?php 
-            if($result->num_rows > 0){
-                while ($row = $result->fetch_assoc()){
+            if($students){
+                foreach($students as $row){
+            // if($result->num_rows > 0){
+            //     while ($row = $result->fetch_assoc()){
                     echo "
                     <tr>
                 <td>{$row['id']}</td>
@@ -180,5 +176,5 @@ include 'flash.message.php';
 </html>
 
 <?php
-$conn->close();
+$conn= null;
 ?>

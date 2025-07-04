@@ -1,5 +1,6 @@
 <?php 
 include 'db_connect.php';
+session_start();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST['name'];
@@ -12,12 +13,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if($conn->query($sql)===FALSE){
             throw new Exception("Insert Failed:" . $conn->error);
         }
-        header("Location: index.php");
-        exit();
-
-    }catch(Exception $e){
-       die('Error:' . $e->getMessage());
-    }
+else{
+    $_SESSION['success'] = "Student created successfully!";
+    header("Location: index.php");
+    exit();
+}
+}catch(Exception $e){
+    // die("". $e->getMessage());
+    $_SESSION["error"] = $e->getMessage();
+    header("Location: index.php");
+    exit();
+}
 }
 ?>
 
@@ -37,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             max-width: 500px;
             margin: auto;
             background-color: #ffffff;
-            padding: 30px;
+            padding: 10px 50px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
@@ -102,6 +108,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 
     .add-new-btn {
+        height: 25px;
+        margin-top: 14px;
         background-color: #28a745;
         color: white;
         padding: 10px 20px;
@@ -116,15 +124,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     .add-new-btn:hover {
         background-color: #218838;
     }
+      .btn-heading{
+        display: flex;
+        gap: 150px;
+    }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <div class="add-new-btn-container">
-    <a href="index.php" class="add-new-btn">➕ See All</a>
+   <div class="add-new-btn-container btn-heading">
+         <h2>➕ Add New Student</h2>
+    <a href="index.php" class="add-new-btn">See All</a>
+
 </div>
-    <h2>➕ Add New Student</h2>
+
     <form action="create.php" method="POST">
         <div class="form-group">
             <label for="name">Full Name</label>

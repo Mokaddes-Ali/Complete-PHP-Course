@@ -2,40 +2,38 @@
 include 'db_connect.php';
 session_start();
 
-try{
-    $id = $_GET['id'];
-
-    $sql = "SELECT * FROM students WHERE id=$id";
-    $result = $conn->query($sql);
-
-    if ($result === false) {
-        throw new Exception("Query Failed Error:" . $conn->error);
-}
-
-$student = $result->fetch_assoc();
-
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
+    try{
+        $sql = "INSERT INTO students(name, email,phone,address) VALUES(:name,:email, :phone, :address)";
 
-        $sql = "UPDATE students SET name = '$name', email = '$email',phone ='$phone' ,address='$address' WHERE id=$id";
+        $stmt = $conn->prepare($sql);
+/*         $stmt হচ্ছে PDOStatement অবজেক্ট, যা এই prepared SQL statement ধরে রাখে।
 
-        if($conn->query($sql)===FALSE){
-            throw new Exception("Update Failed:" . $conn->error);
-        }
-else{
-    $_SESSION['success'] = "Student updated successfully!";
+ তুমি এখন এটাতে bindParam() বা execute() করতে পারো। */
+ $stmt->execute([
+    ':name' => $name,
+    ':email'=> $email,
+    'phone'=> $phone,
+    'address'=> $address
+ ]);
+
+//         if($conn->query($sql)===FALSE){
+//             throw new Exception("Insert Failed:" . $conn->error);
+//         }
+// else{
+    $_SESSION['success'] = "Student created successfully!";
     header("Location: index.php");
     exit();
-}
-}
-}catch(Exception $e){
+}catch(PDOException $e){
     // die("". $e->getMessage());
     $_SESSION["error"] = $e->getMessage();
     header("Location: index.php");
     exit();
+}
 }
 ?>
 
@@ -120,9 +118,9 @@ else{
     }
 
     .add-new-btn {
+        height: 25px;
         margin-top: 14px;
         background-color: #28a745;
-        height: 25px;
         color: white;
         padding: 10px 20px;
         font-size: 16px;
@@ -136,43 +134,43 @@ else{
     .add-new-btn:hover {
         background-color: #218838;
     }
-    .btn-heading{
+      .btn-heading{
         display: flex;
-        gap: 190px;
+        gap: 150px;
     }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <div class="add-new-btn-container btn-heading">
-         <h2>Update Student</h2>
+   <div class="add-new-btn-container btn-heading">
+         <h2>➕ Add New Student</h2>
     <a href="index.php" class="add-new-btn">See All</a>
 
 </div>
-   
-    <form action="update.php?id=<?php echo $id; ?>" method="POST">
+
+    <form action="create.php" method="POST">
         <div class="form-group">
             <label for="name">Full Name</label>
-            <input type="text" name="name" id="name" value="<?php echo $student['name'] ?>" required>
+            <input type="text" name="name" id="name" placeholder="Enter full name" required>
         </div>
 
         <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" name="email" id="email" value="<?php echo $student['email'] ?>" required>
+            <input type="email" name="email" id="email" placeholder="Enter email" required>
         </div>
 
         <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input type="text" name="phone" id="phone" value="<?php echo $student['phone'] ?>" required>
+            <input type="text" name="phone" id="phone" placeholder="Enter phone number" required>
         </div>
 
         <div class="form-group">
             <label for="address">Home Address</label>
-            <textarea name="address" id="address" rows="3"><?php echo $student['address'] ?></textarea>
+            <textarea name="address" id="address" rows="3" placeholder="Enter address" required></textarea>
         </div>
 
-        <button type="submit" class="submit-btn">Update</button>
+        <button type="submit" class="submit-btn">Save Student</button>
     </form>
 </div>
 

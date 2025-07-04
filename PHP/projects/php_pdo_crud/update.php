@@ -5,14 +5,17 @@ session_start();
 try{
     $id = $_GET['id'];
 
-    $sql = "SELECT * FROM students WHERE id=$id";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM students WHERE id=:id";
+    $stmt = $conn->prepare($sql);
+     $stmt ->execute([':id'=>$id]);
+    // $result = $conn->query($sql);
 
-    if ($result === false) {
-        throw new Exception("Query Failed Error:" . $conn->error);
-}
+//     if ($result === false) {
+//         throw new Exception("Query Failed Error:" . $conn->error);
+// }
 
-$student = $result->fetch_assoc();
+$student = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST['name'];
@@ -20,18 +23,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $phone = $_POST['phone'];
     $address = $_POST['address'];
 
-        $sql = "UPDATE students SET name = '$name', email = '$email',phone ='$phone' ,address='$address' WHERE id=$id";
+        $sql = "UPDATE students SET name = :name, email = :email, phone =:phone,address=:address WHERE id=:id";
+        $updateStmt = $conn->prepare($sql);
 
-        if($conn->query($sql)===FALSE){
-            throw new Exception("Update Failed:" . $conn->error);
-        }
-else{
+//         if($conn->query($sql)===FALSE){
+//             throw new Exception("Update Failed:" . $conn->error);
+//         }
+// else{
+  $updateStmt->execute([
+    ':name'=> $name,
+    ':email' => $email,
+    ':phone'=> $phone,
+    ':address'=> $address,
+    ':id' => $id
+ ]);
     $_SESSION['success'] = "Student updated successfully!";
     header("Location: index.php");
     exit();
 }
-}
-}catch(Exception $e){
+}catch(PDOException $e){
     // die("". $e->getMessage());
     $_SESSION["error"] = $e->getMessage();
     header("Location: index.php");
