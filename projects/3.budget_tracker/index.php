@@ -8,6 +8,9 @@ $expense = new Expense($pdo);
 $totalIncome = $income->getTotalIncome();
 $totalExpense = $expense->getTotalExpense();
 $savings = calculateSavings($totalIncome, $totalExpense);
+
+$stmt = $pdo->query("SELECT * FROM entries ORDER BY id DESC");
+$entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -92,6 +95,45 @@ $savings = calculateSavings($totalIncome, $totalExpense);
         </div>
     </div>
 </div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10 summary-section">
+            <h4 class="text-center mb-4">All Income & Expense Entries</h4>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($entries as $index => $entry): ?>
+                        <tr>
+                            <td><?= $entry['id']; ?></td>
+                            <td><?= htmlspecialchars($entry['entry_date']) ?></td>
+                            <td><?= htmlspecialchars($entry['category']) ?></td>
+                            <td><?= htmlspecialchars($entry['description'] ?? 'N/A') ?></td>
+                            <td>
+                                <?php if ($entry['type'] === 'income'): ?>
+                                    <span class="text-success fw-bold">Income</span>
+                                <?php else: ?>
+                                    <span class="text-danger fw-bold">Expense</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>$<?= number_format($entry['amount'], 2) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {

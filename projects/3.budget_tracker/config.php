@@ -10,7 +10,7 @@ try{
 
     // PDO Error mode set and exception mode G
      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected Successfully<br>";
+    // echo "Connected Successfully<br>";
     // if ($conn->connect_error) {
     //     throw new Exception("Connection failed". $conn->connect_error);
     // }
@@ -28,9 +28,9 @@ try{
     ";
 
  $pdo->exec($sql);
-         echo "<div style='padding:10px; background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; border-radius: 5px;'>
-                🛠️ Table 'students' created successfully or already exists.
-              </div>";
+        //  echo "<div style='padding:10px; background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; border-radius: 5px;'>
+        //         🛠️ Table 'entries' created successfully or already exists.
+        //       </div>";
 
 }catch(PDOException $e){
     echo "<div style='padding:10px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 5px;'>
