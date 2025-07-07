@@ -4,9 +4,6 @@
 class FileHandler{
     private $file;
     public function __construct($fileName){
-        // if(!file_exists($fileName)){
-        //     echo "File doesnot exit. creating new file......\n";
-        // }
         $this->file = fopen($fileName,"w");
         if($this->file){
         echo "File".$fileName."Open Successfully! \n";
