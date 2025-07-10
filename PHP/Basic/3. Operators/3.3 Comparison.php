@@ -89,11 +89,57 @@ echo "Checking if \$num1 < \$num2: ";
 var_dump($less);
 
 // 7. Greater than or equal to 
+
+#example1
+$salary = 50000;
+$minimumSalary = 45000;
+if($salary >= $minimumSalary) {
+   echo "Salary meets the criteria\n";
+}else{
+   echo "Salary does not meets the criteria\n";
+}
+
+#example2
 $greaterEqual = $num1 >= $num2;
 echo "Checking if \$num1 >= \$num2: ";
 var_dump($greaterEqual);
 
-// 7. Less than or equal to 
+// 8. Less than or equal to 
+
+#example1
+$fee =150;
+$budget = 200;
+if($fee <= $budget) {
+   echo "Fee is within budget\n";
+}else{
+   echo "Fee is not within budget\n";
+}
+#example2
 $lessEqual = $num1 <= $num2;
 echo "Checking if \$num1 <= \$num2: ";
 var_dump($lessEqual);
+
+
+//9. Spaceship operator (<=>)
+// <=> ($a <=> $b === 0) spaceship operator
+
+$gustAge = 28;
+$ageLimit = 30;
+$result = $gustAge <=> $ageLimit;
+
+if($result < 0) {
+   echo "Guest join the party.";
+}elseif($result === 0){
+   echo "Guest join the party. equal value";
+}else{
+   echo "Guest can not join the party.";
+}
+
+$spaceship1 = 3 <=> 5; //-1 output first value small
+echo "$spaceship1\n"; 
+
+$spaceship2 = 5 <=> 5; //0 output two value same
+echo "$spaceship2\n"; 
+
+$spaceship3 = 6 <=> 5; //1 output first value big
+echo "$spaceship3\n"; 

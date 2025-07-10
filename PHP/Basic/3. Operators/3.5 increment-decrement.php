@@ -1,6 +1,5 @@
 <?php
 $a = 5;
-$b = 5;
 
 // Increment Operator
 
@@ -10,9 +9,12 @@ echo "Post-increment: Value of c (before increment) = $c\n";
 echo "Value of a (after increment) = $a\n";
 
 // pre increment: আগে $b বাড়বে, তারপর $d তে সেই মান যাবে
-$d = ++$b;
+$b = 5;
+$d = ++$b; //output 6, 
 echo "Pre-increment: Value of d (after increment) = $d\n";
 echo "Value of b (after increment) = $b\n";
+
+#example2
 
 // Decrement Operator
 
