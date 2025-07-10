@@ -17,29 +17,45 @@ Encapsulation অর্থ হলো "আবৃত করে রাখা"। �
 এটি ক্লাস এবং তার চাইল্ড ক্লাসের মধ্যে ব্যবহারযোগ্য।
 কিন্তু ক্লাসের বাইরে থেকে অ্যাক্সেস করা যায় না।
 */
-class Validator{
-    public $errors = []; 
+// class Validator{
+//     public $errors = []; 
 
-    public function validate($data, $rules){
-       //
-       $this->errors[] = ' This email is required';
+//     public function validate($data, $rules){
+//        //
+//        $this->errors[] = ' This email is required';
       
-    }
-    public function fails(){
-        //
-        return !empty($this->errors);
-    }
-    public function getErrors(){
-        return $this->errors;
+//     }
+//     public function fails(){
+//         //
+//         return !empty($this->errors);
+//     }
+//     public function getErrors(){
+//         return $this->errors;
+//     }
+// }
+
+// $validator = new Validator;
+
+// $validator->validate(['email'],['required']);
+
+// if($validator->fails()){
+//     die('Fails');
+// }
+
+
+class Product{
+    public $name;
+    private $price;
+
+    public function productInfo(){
+        echo $this->price = 20000;
     }
 }
 
-$validator = new Validator;
-
-$validator->validate(['email'],['required']);
-
-if($validator->fails()){
-    die('Fails');
-}
-
+$product1 = new Product();
+$product1->name = "Product1";
+echo $product1->name . "\n";
+// $product1->price = 6500;
+// echo $product1->price;
+$product1->productInfo();
 ?>
