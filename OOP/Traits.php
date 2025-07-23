@@ -77,8 +77,6 @@ class UserInformation{
     use Log1, Tracetimer{
         Log1::UserLog insteadof Tracetimer;
     }
-   
-
 }
 
 $user = new UserInformation();
