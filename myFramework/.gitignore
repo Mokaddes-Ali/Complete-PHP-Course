@@ -1,0 +1,26 @@
+# Ignore vendor directory
+/vendor/
+
+# Ignore .env environment file
+.env
+
+# Ignore Composer lock file (optional, if you're making a package)
+# composer.lock
+
+# Ignore node_modules if using frontend tools
+/node_modules/
+
+# Ignore OS/system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor files
+.idea/
+.vscode/
+
+# Ignore Laravel-specific or cache files (if applicable)
+storage/
+bootstrap/cache/
+
+# Ignore log files
+*.log
