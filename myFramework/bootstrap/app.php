@@ -1,21 +1,18 @@
 <?php
 
 use App\Core\App;
-use Spatie\Ignition\Ignition;
+use App\Providers\AppServiceProvider;
 use League\Container\Container;
 
 require "../vendor/autoload.php";
 
-Ignition::make()->register();
 
-// setup
+
 $container = new Container();
-// add a service by container
-$container->add('name', function(){
-    return 'Jon Doe';
-});
+$container ->addServiceProvider(new AppServiceProvider());
+$logger = $container ->get(('logger'));
+var_dump($logger);
 
-var_dump($container->get('name'));
 
 die();
 
