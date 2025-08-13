@@ -1,0 +1,11 @@
+<?php 
+
+{
+    "autoload": {
+        "psr-4":{
+            "MyProject\\": "src/"
+        }
+    }
+}
+
+?>
